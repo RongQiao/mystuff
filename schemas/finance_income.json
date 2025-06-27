@@ -1,0 +1,11 @@
+{
+  "table_name": "finance_income",
+  "columns": [
+    { "name": "id", "type": "INTEGER", "primary_key": true },
+    { "name": "source", "type": "TEXT", "nullable": false },
+    { "name": "amount", "type": "REAL", "nullable": false },
+    { "name": "received_date", "type": "DATE", "nullable": false },
+    { "name": "period_type", "type": "TEXT", "nullable": false },
+    { "name": "note", "type": "TEXT", "nullable": true }
+  ]
+}

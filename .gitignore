@@ -1,0 +1,20 @@
+# Ignore all .log files
+*.log
+
+# Ignore environment files
+.env
+
+# Ignore node_modules or other dependency folders
+node_modules/
+
+# Ignore Python cache
+__pycache__/
+
+# Ignore compiled files
+*.pyc
+
+# Ignore secret config
+config/secrets.json
+
+# Ignore db files
+app.db
