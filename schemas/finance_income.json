@@ -1,11 +1,14 @@
 {
   "table_name": "finance_income",
   "columns": [
-    { "name": "id", "type": "INTEGER", "primary_key": true },
-    { "name": "source", "type": "TEXT", "nullable": false },
+    { "name": "id", "type": "INTEGER", "primary_key": true, "auto_increment": true },
+    { "name": "category", "type": "TEXT", "nullable": false },
     { "name": "amount", "type": "REAL", "nullable": false },
     { "name": "received_date", "type": "DATE", "nullable": false },
     { "name": "period_type", "type": "TEXT", "nullable": false },
+    { "name": "source", "type": "TEXT", "nullable": true },
+    { "name": "by_who", "type": "INTEGER", "nullable": true, "foreign_key": {"table": "people_individual", "column": "id", "on_delete": "CASCADE"}},
     { "name": "note", "type": "TEXT", "nullable": true }
   ]
 }
+ 

@@ -1,0 +1,11 @@
+{
+  "table_name": "finance_invest_account_value",
+  "columns": [
+    { "name": "id", "type": "INTEGER", "primary_key": true, "auto_increment": true },
+    { "name": "account_id", "type": "INTEGER", "nullable": true, "foreign_key": {"table": "finance_invest_account", "column": "id", "on_delete": "CASCADE"}},
+    { "name": "amount", "type": "REAL", "nullable": false },
+    { "name": "check_date", "type": "DATE", "nullable": false },
+    { "name": "note", "type": "TEXT", "nullable": true }
+  ]
+}
+ 

@@ -2,6 +2,22 @@ import json
 import sqlite3
 
 
+def generate_foreign_key_column(cln_name, fk_properties):
+    line = f"FOREIGN KEY ({cln_name}) REFERENCES {fk_properties['table']}({fk_properties['column']})"
+    if od_value := fk_properties.get("on_delete"):
+        line += f" ON DELETE {od_value}"
+    return line
+
+
+def generate_common_column(cln_properties):
+    line = f"{cln_properties['name']} {cln_properties['type']}"
+    if cln_properties.get("primary_key"):
+        line += " PRIMARY KEY"
+    if not cln_properties.get("nullable", True):
+        line += " NOT NULL"
+    return line
+
+
 def load_schema(json_path, db_path):
     with open(json_path, "r") as f:
         schema = json.load(f)
@@ -11,11 +27,11 @@ def load_schema(json_path, db_path):
 
     col_defs = []
     for col in columns:
-        line = f"{col['name']} {col['type']}"
-        if col.get("primary_key"):
-            line += " PRIMARY KEY"
-        if not col.get("nullable", True):
-            line += " NOT NULL"
+        # manage if there is foreign key
+        if fk_properties := col.get("foreigh_key"):
+            line = generate_foreign_key_column(col["name"], fk_properties)
+        else:
+            line = generate_common_column(col)
         col_defs.append(line)
 
     create_stmt = (
@@ -41,7 +57,15 @@ def insert_data_from_json(json_data_path, db_path, table_name):
         print(f"No data found in {json_data_path}")
         return
 
-    keys = records[0].keys()
+    # find a record with most keys
+    index = 0
+    key_cnt = 0
+    for i in range(len(records)):
+        if c := len(records[i].keys()) > key_cnt:
+            key_cnt = c
+            index = i
+
+    keys = records[index].keys()
     columns = ", ".join(keys)
     placeholders = ", ".join(["?"] * len(keys))
 
@@ -49,7 +73,7 @@ def insert_data_from_json(json_data_path, db_path, table_name):
     cursor = conn.cursor()
 
     for record in records:
-        values = tuple(record[k] for k in keys)
+        values = tuple(record.get(k, "") for k in keys)
         cursor.execute(
             f"INSERT INTO {table_name} ({columns}) VALUES ({placeholders})", values
         )

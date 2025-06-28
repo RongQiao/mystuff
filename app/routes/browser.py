@@ -16,12 +16,43 @@ def list_tables():
     return render_template("tables.html", tables=tables)
 
 
+def generate_select_query(table_name):
+    if table_name == "finance_income":
+        query = """
+        SELECT 
+            finance_income.category,
+            finance_income.amount,
+            finance_income.received_date,
+            finance_income.source,
+            finance_income.note,
+            people_individual.first_name,
+            people_individual.last_name
+        FROM finance_income
+        JOIN people_individual ON finance_income.by_who = people_individual.id;"""
+    elif table_name == "finance_invest_account_value":
+        query = """
+        SELECT 
+            finance_invest_account_value.id,
+            finance_invest_account_value.amount,
+            finance_invest_account_value.check_date,
+            finance_invest_account_value.note,
+            finance_invest_account.name,
+            finance_invest_account.company
+        FROM finance_invest_account_value
+        JOIN finance_invest_account ON finance_invest_account_value.account_id = finance_invest_account.id;"""
+    else:
+        query = f"SELECT * FROM {table_name}"
+
+    return query
+
+
+
 @browser_bp.route("/table/<table_name>")
 def show_table_data(table_name):
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
-
-    cursor.execute(f"SELECT * FROM {table_name}")
+    query = generate_select_query(table_name)
+    cursor.execute(query)
     rows = cursor.fetchall()
     column_names = [description[0] for description in cursor.description]
 

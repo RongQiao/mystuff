@@ -15,7 +15,11 @@
       {% for row in rows %}
         <tr>
           {% for cell in row %}
-            <td>{{ cell }}</td>
+            {% if loop.index0 == 1 %}
+              <td>{{ cell|thousands }}</td>
+            {% else %}
+              <td>{{ cell }}</td>
+            {% endif %}
           {% endfor %}
         </tr>
       {% endfor %}
@@ -23,10 +27,10 @@
   </table>
   {% if summary %}
     <h2>💡 Income Summary</h2>
-    <p><strong>Total Income:</strong> {{ summary.total_income }}</p>
+    <p><strong>Total Income:</strong> {{ summary.total_income|thousands }}</p>
     <ul>
       {% for period, amount in summary.by_period %}
-        <li><strong>{{ period.title() }}:</strong> {{ amount }}</li>
+        <li><strong>{{ period.title() }}:</strong> {{ amount|thousands }}</li>
       {% endfor %}
     </ul>
   {% endif %}
