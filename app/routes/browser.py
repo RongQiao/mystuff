@@ -16,10 +16,23 @@ def list_tables():
     return render_template("tables.html", tables=tables)
 
 
+def generate_select_query_stock():
+    return """
+    SELECT
+            finance_invest_stock_hold.id,
+            finance_invest_stock_hold.quantity,
+            finance_invest_stock_hold.current_value,
+            finance_invest_stock_hold.check_date,
+            finance_invest_stock.name_full,
+            finance_invest_stock.type
+        FROM finance_invest_stock_hold
+        JOIN finance_invest_stock ON finance_invest_stock_hold.stock_id = finance_invest_stock.id;
+    """
+
 def generate_select_query(table_name):
     if table_name == "finance_income":
         query = """
-        SELECT 
+        SELECT
             finance_income.category,
             finance_income.amount,
             finance_income.received_date,
@@ -31,15 +44,17 @@ def generate_select_query(table_name):
         JOIN people_individual ON finance_income.by_who = people_individual.id;"""
     elif table_name == "finance_invest_account_value":
         query = """
-        SELECT 
+        SELECT
             finance_invest_account_value.id,
             finance_invest_account_value.amount,
             finance_invest_account_value.check_date,
             finance_invest_account_value.note,
-            finance_invest_account.name,
+            finance_invest_account.name_full,
             finance_invest_account.company
         FROM finance_invest_account_value
         JOIN finance_invest_account ON finance_invest_account_value.account_id = finance_invest_account.id;"""
+    elif table_name == "finance_invest_stock_hold":
+        query = generate_select_query_stock()
     else:
         query = f"SELECT * FROM {table_name}"
 

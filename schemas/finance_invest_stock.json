@@ -1,11 +1,10 @@
 {
-  "table_name": "finance_invest_account",
+  "table_name": "finance_invest_stock",
   "columns": [
     { "name": "id", "type": "INTEGER", "primary_key": true, "auto_increment": true },
     { "name": "name_short", "type": "TEXT", "nullable": false },
     { "name": "name_full", "type": "TEXT", "nullable": false },
-    { "name": "company", "type": "TEXT", "nullable": false },
-    { "name": "website", "type": "TEXT", "nullable": false },
+    { "name": "type", "type": "TEXT", "nullable": false },
     { "name": "note", "type": "TEXT", "nullable": true }
   ]
 }

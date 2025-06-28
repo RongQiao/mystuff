@@ -1,0 +1,12 @@
+{
+  "table_name": "finance_invest_stock_hold",
+  "columns": [
+    { "name": "id", "type": "INTEGER", "primary_key": true, "auto_increment": true },
+    { "name": "stock_id", "type": "INTEGER", "nullable": false, "foreign_key": {"table": "finance_invest_stock", "column": "id", "on_delete": "CASCADE"}},
+    { "name": "quantity", "type": "REAL", "nullable": false},
+    { "name": "current_value", "type": "REAL", "nullable": false },
+    { "name": "check_date", "type": "DATE", "nullable": false },
+    { "name": "note", "type": "TEXT", "nullable": true }
+  ]
+}
+ 

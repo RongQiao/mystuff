@@ -57,4 +57,8 @@ def dba(run_schema: bool = True, run_data: bool = True):
         insert_data_from_json(data_path, db_config.DB_PATH, "finance_invest_account")
         data_path = db_config.DATA_FILE_PATH / "finance_invest_account_value.json"
         insert_data_from_json(data_path, db_config.DB_PATH, "finance_invest_account_value")
+        data_path = db_config.DATA_FILE_PATH / "finance_invest_stock.json"
+        insert_data_from_json(data_path, db_config.DB_PATH, "finance_invest_stock")
+        data_path = db_config.DATA_FILE_PATH / "finance_invest_stock_hold.json"
+        insert_data_from_json(data_path, db_config.DB_PATH, "finance_invest_stock_hold")
 
