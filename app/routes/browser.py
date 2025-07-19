@@ -1,8 +1,8 @@
 from config import db_config
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request, redirect, url_for
 import sqlite3
 
-from app.routes.aaa import fetch_login_data
+from app.routes.aaa import fetch_login_data, inser_new_login_data, LoginFormData
 
 browser_bp = Blueprint("browser", __name__)
 DB_PATH = db_config.DB_PATH
@@ -14,8 +14,24 @@ def index():
 
 @browser_bp.route('/myaaa')
 def myaaa():
-    login_info = fetch_login_data( DB_PATH)
+    login_info = fetch_login_data()
     return render_template('myaaa.html', login_info=login_info)
+
+@browser_bp.route('/myaaa_add_login', methods=['POST'])
+def myaaa_add_login():
+    input_data = LoginFormData(
+        name_short = request.form.get('name_short'),
+        website = request.form.get('website'),
+        category = request.form.get('category'),
+        note = request.form.get('note'),
+        username_short = request.form.get('username_short'),
+        cipher_shortname = request.form.get('cipher_shortname'),
+        owner = request.form.get('owner'),
+        has_sub_plan = request.form.get('has_sub_plan'),
+        has_point_plan = request.form.get('has_point_plan')
+    )
+    inser_new_login_data(input_data)
+    return redirect(url_for('browser.myaaa'))
 
 @browser_bp.route('/myfinance')
 def myfinance():
@@ -85,8 +101,6 @@ def generate_select_query(table_name):
         query = generate_select_query_account_value()
     elif table_name == "finance_invest_stock_hold":
         query = generate_select_query_stock()
-    elif table_name == "aaa_login":
-        query = generate_select_query_aaa_login()
     else:
         query = f"SELECT * FROM {table_name}"
 

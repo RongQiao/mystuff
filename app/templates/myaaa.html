@@ -4,6 +4,7 @@
 
 {% block content %}
   <h1>My login information</h1>
+
   <table border="1" cellspacing="0" cellpadding="8">
     <thead>
       <tr>
@@ -19,6 +20,25 @@
       </tr>
     </thead>
     <tbody>
+      <!-- Form row -->
+      <tr>
+        <form method="POST" action="{{ url_for('browser.myaaa_add_login') }}">
+          <td><input type="text" name="name_short" required></td>
+          <td><input type="text" name="website" required></td>
+          <td><input type="text" name="category" required></td>
+          <td><input type="text" name="note"></td>
+          <td style="text-align: center;">
+            <input type="checkbox" name="has_sub_plan" value="true">
+          </td>
+          <td style="text-align: center;">
+            <input type="checkbox" name="has_point_plan" value="true">
+          </td>
+          <td><input type="text" name="username_short" required></td>
+          <td><input type="text" name="cipher_shortname" required></td>
+          <td><input type="text" name="owner" required></td>
+          <td><button type="submit">Add</button></td>
+        </form>
+      </tr>
       {% for login in login_info %}
       <tr>
         <td>{{ login.name_short }}</td>
@@ -34,4 +54,5 @@
       {% endfor %}
     </tbody>
   </table>
+
 {% endblock %}
