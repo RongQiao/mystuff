@@ -1,0 +1,20 @@
+[
+  {
+    "username_short": "main",
+    "username": "diana@example.com",
+    "note": "Finance team lead",
+    "is_email": true
+  },
+  {
+    "username_short": "dev",
+    "username": "edward_dev",
+    "note": "Backend developer",
+    "is_email": false
+  },
+  {
+    "username_short": "test",
+    "username": "frank@example.org",
+    "note": null,
+    "is_email": true
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "name_short": "AAA",
+    "name_full": "AAA Trust",
+    "type": "ETF",
+    "note": "Tracks the Nasdaq-100 Index"
+  },
+  {
+    "name_short": "BBB",
+    "name_full": "BBB Corporation",
+    "type": "Stock",
+    "note": "Cloud computing, software, and AI"
+  },
+  {
+    "name_short": "CCC",
+    "name_full": "CCC Corporation",
+    "type": "Stock",
+    "note": "Leader in GPUs and AI hardware"
+  },
+  {
+    "name_short": "DDD",
+    "name_full": "DDD, Inc.",
+    "type": "Stock",
+    "note": "Electric vehicles and clean energy"
+  }
+]

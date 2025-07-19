@@ -1,0 +1,17 @@
+[
+  {
+    "cipher_shortname": "db_password",
+    "cipher_encrypted": "gAAAAABlYz8k9vZ3x1nXzQ==",
+    "note": "Encrypted database password"
+  },
+  {
+    "cipher_shortname": "api_key_prod",
+    "cipher_encrypted": "gAAAAABlYz9L3kT2m5pQwA==",
+    "note": "Production API key"
+  },
+  {
+    "cipher_shortname": "slack_webhook",
+    "cipher_encrypted": "gAAAAABlYz9s8eJ7v2rTzA==",
+    "note": null
+  }
+]

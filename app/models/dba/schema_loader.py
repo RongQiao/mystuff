@@ -15,6 +15,8 @@ def generate_common_column(cln_properties):
         line += " PRIMARY KEY"
     if not cln_properties.get("nullable", True):
         line += " NOT NULL"
+    if d_value := cln_properties.get("default"):
+        line += f" DEFAULT {d_value}"
     return line
 
 
@@ -74,9 +76,14 @@ def insert_data_from_json(json_data_path, db_path, table_name):
 
     for record in records:
         values = tuple(record.get(k, "") for k in keys)
-        cursor.execute(
-            f"INSERT INTO {table_name} ({columns}) VALUES ({placeholders})", values
-        )
+        sql_query = f"INSERT INTO {table_name} ({columns}) VALUES ({placeholders})"
+        try:
+            cursor.execute(
+                sql_query, values
+            )
+        except sqlite3.OperationalError as err:
+            print(f"{sql_query}, values")
+            raise err
 
     conn.commit()
     conn.close()

@@ -1,0 +1,62 @@
+[
+  {
+    "name_short": "S1",
+    "website": "https://github.com",
+    "category": "Development",
+    "username_id": 1,
+    "cipher_id": 1,
+    "primary_people_id": 1,
+    "register_date": "2022-05-14",
+    "note": "Personal GitHub account",
+    "has_sub_plan": false,
+    "has_point_plan": false
+  },
+  {
+    "name_short": "S2",
+    "website": "https://aws.amazon.com",
+    "category": "Cloud",
+    "username_id": 2,
+    "cipher_id": 2,
+    "primary_people_id": 1,
+    "register_date": "2023-01-10",
+    "note": "Production AWS login",
+    "has_sub_plan": false,
+    "has_point_plan": false
+  },
+  {
+    "name_short": "S3",
+    "website": "https://slack.com",
+    "category": "Communication",
+    "username_id": 3,
+    "cipher_id": 3,
+    "primary_people_id": 1,
+    "register_date": "2021-11-03",
+    "note": null,
+    "has_sub_plan": false,
+    "has_point_plan": false
+  },
+  {
+    "name_short": "S4",
+    "website": "https://notion.so",
+    "category": "Productivity",
+    "username_id": 1,
+    "cipher_id": 2,
+    "primary_people_id": 1,
+    "register_date": "2022-08-22",
+    "note": "Team workspace",
+    "has_sub_plan": false,
+    "has_point_plan": false
+  },
+  {
+    "name_short": "S5",
+    "website": "https://openai.com",
+    "category": "AI Tools",
+    "username_id": 2,
+    "cipher_id": 1,
+    "primary_people_id": 1,
+    "register_date": "2023-06-01",
+    "note": "API access account",
+    "has_sub_plan": false,
+    "has_point_plan": false
+  }
+]

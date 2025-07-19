@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}My Site{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+  <nav class="menu">
+    <ul>
+      <li><a href="{{ url_for('browser.index') }}">Home</a></li>
+      <li><a href="{{ url_for('browser.myaaa') }}">MyAAA</a></li>
+      <li><a href="{{ url_for('browser.myfinance') }}">MyFinance</a></li>
+      <li><a href="{{ url_for('browser.mytable') }}">MyTable</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

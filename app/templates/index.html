@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome Page</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="menu">
+    <ul>
+      <li><a href="{{ url_for('browser.myaaa') }}">MyAAA</a></li>
+      <li><a href="{{ url_for('browser.myfinance') }}">MyFinance</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <h1>Welcome to Your Dashboard</h1>
+    <p>Select a section from the menu to begin.</p>
+  </main>
+</body>
+</html>

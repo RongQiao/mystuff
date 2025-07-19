@@ -1,13 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head><title>Database Tables</title></head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}MyAAA Page{% endblock %}
+
+{% block content %}
   <h1>Tables in app.db</h1>
   <ul>
     {% for table in tables %}
       <li><a href="{{ url_for('browser.show_table_data', table_name=table) }}">{{ table }}</a></li>
     {% endfor %}
   </ul>
-</body>
-</html>
-
+{% endblock %}

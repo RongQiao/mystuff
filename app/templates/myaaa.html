@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}MyAAA Page{% endblock %}
+
+{% block content %}
+  <h1>My login information</h1>
+  <table border="1" cellspacing="0" cellpadding="8">
+    <thead>
+      <tr>
+        <th>name_short</th>
+        <th>website</th>
+        <th>category</th>
+        <th>Note</th>
+        <th>has_sub_plan</th>
+        <th>has_point_plan</th>
+        <th>username_short</th>
+        <th>cipher_shortname</th>
+        <th>owner</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for login in login_info %}
+      <tr>
+        <td>{{ login.name_short }}</td>
+        <td>{{ login.website }}</td>
+        <td>{{ login.category }}</td>
+        <td>{{ login.note if login.note else '—' }}</td>
+        <td>{{ '✅' if login.has_sub_plan else '❌' }}</td>
+        <td>{{ '✅' if login.has_point_plan else '❌' }}</td>
+        <td>{{ login.username_short }}</td>
+        <td>{{ login.cipher_shortname }}</td>
+        <td>{{ login.owner }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

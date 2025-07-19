@@ -1,0 +1,9 @@
+{
+  "table_name": "aaa_cipher",
+  "columns": [
+    { "name": "id", "type": "INTEGER", "primary_key": true, "auto_increment": true },
+    { "name": "cipher_shortname", "type": "TEXT", "nullable": false },
+    { "name": "cipher_encrypted", "type": "TEXT", "nullable": false },
+    { "name": "note", "type": "TEXT", "nullable": true }
+  ]
+}

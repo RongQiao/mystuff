@@ -36,7 +36,10 @@ def drop_all_tables(db_path):
     conn.close()
 
 
-def dba(run_schema: bool = True, run_data: bool = True):
+def dba(run_schema: bool = True, run_data: str = "sample"):
+    if run_data not in str(db_config.DATA_FILE_PATH):
+        db_config.DATA_FILE_PATH = db_config.DB_DIR / run_data
+
     if run_schema:
         # make sure db is initialzed
         init_db()
@@ -49,16 +52,18 @@ def dba(run_schema: bool = True, run_data: bool = True):
             load_schema(schema, db_config.DB_PATH)
 
     if run_data:
-        data_path = db_config.DATA_FILE_PATH / "people_individual.json"
-        insert_data_from_json(data_path, db_config.DB_PATH, "people_individual")
-        data_path = db_config.DATA_FILE_PATH / "rong_salary_upto_2024.json"
-        insert_data_from_json(data_path, db_config.DB_PATH, "finance_income")
-        data_path = db_config.DATA_FILE_PATH / "finance_invest_account.json"
-        insert_data_from_json(data_path, db_config.DB_PATH, "finance_invest_account")
-        data_path = db_config.DATA_FILE_PATH / "finance_invest_account_value.json"
-        insert_data_from_json(data_path, db_config.DB_PATH, "finance_invest_account_value")
-        data_path = db_config.DATA_FILE_PATH / "finance_invest_stock.json"
-        insert_data_from_json(data_path, db_config.DB_PATH, "finance_invest_stock")
-        data_path = db_config.DATA_FILE_PATH / "finance_invest_stock_hold.json"
-        insert_data_from_json(data_path, db_config.DB_PATH, "finance_invest_stock_hold")
+        file_table_map = {
+            "people_individual.json": "people_individual",
+            "finance_income.json": "finance_income",
+            "finance_invest_account.json": "finance_invest_account",
+            "finance_invest_account_value.json": "finance_invest_account_value",
+            "finance_invest_stock.json": "finance_invest_stock",
+            "finance_invest_stock_hold.json": "finance_invest_stock_hold",
+            "aaa_login.json": "aaa_login",
+            "aaa_username.json": "aaa_username",
+            "aaa_cipher.json": "aaa_cipher",
+        }
 
+        for filename, table_name in file_table_map.items():
+            data_path = db_config.DATA_FILE_PATH / filename
+            insert_data_from_json(data_path, db_config.DB_PATH, table_name)

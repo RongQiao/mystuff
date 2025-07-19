@@ -1,0 +1,26 @@
+[
+  {
+    "category": "w2_medicare_wages",
+    "amount": 100000,
+    "received_date": "2024-12-30",
+    "period_type": "year",
+    "source": "company a",
+    "by_who": 1
+  },
+  {
+    "category": "w2_medicare_wages",
+    "amount": 80000,
+    "received_date": "2023-12-30",
+    "period_type": "year",
+    "source": "company a",
+    "by_who": 1
+  },
+  {
+    "category": "w2_medicare_wages",
+    "amount": 70000,
+    "received_date": "2022-12-30",
+    "period_type": "year",
+    "source": "company b",
+    "by_who": 1
+  }
+]

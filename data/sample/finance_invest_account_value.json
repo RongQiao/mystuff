@@ -1,0 +1,20 @@
+[
+    {
+        "account_id": 1,
+        "amount": 10000,
+        "check_date": "2025-06-27",
+        "note": "initial check"
+    },
+    {
+        "account_id": 2,
+        "amount": 10000,
+        "check_date": "2025-06-27",
+        "note": "initial check"
+    },
+    {
+        "account_id": 3,
+        "amount": 10000,
+        "check_date": "2025-06-27",
+        "note": "initial check"
+    }
+]

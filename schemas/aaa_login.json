@@ -1,0 +1,17 @@
+{
+  "table_name": "aaa_login",
+  "columns": [
+    { "name": "id", "type": "INTEGER", "primary_key": true, "auto_increment": true },
+    { "name": "name_short", "type": "TEXT", "nullable": true },
+    { "name": "website", "type": "TEXT", "nullable": false },
+    { "name": "category", "type": "TEXT", "nullable": true },
+    { "name": "username_id", "type": "INTEGER", "nullable": false, "foreign_key": {"table": "aaa_username", "column": "id", "on_delete": "CASCADE"}},
+    { "name": "cipher_id", "type": "INTEGER", "nullable": false, "foreign_key": {"table": "aaa_cipher", "column": "id", "on_delete": "CASCADE"}},
+    { "name": "primary_people_id", "type": "INTEGER", "nullable": false, "foreign_key": {"table": "people_individual", "column": "id", "on_delete": "CASCADE"}},
+    { "name": "register_date", "type": "DATE", "nullable": true },
+    { "name": "tier", "type": "INTEGER", "nullable": true },
+    { "name": "note", "type": "TEXT", "nullable": true },
+    { "name": "has_sub_plan", "type": "BOOLEAN", "nullable": false, "default": true },
+    { "name": "has_point_plan", "type": "BOOLEAN", "nullable": false, "default": false }
+  ]
+}

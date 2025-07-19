@@ -2,12 +2,27 @@ from config import db_config
 from flask import Blueprint, render_template
 import sqlite3
 
+from app.routes.aaa import fetch_login_data
+
 browser_bp = Blueprint("browser", __name__)
 DB_PATH = db_config.DB_PATH
 
 
-@browser_bp.route("/")
-def list_tables():
+@browser_bp.route('/')
+def index():
+    return render_template('index.html')
+
+@browser_bp.route('/myaaa')
+def myaaa():
+    login_info = fetch_login_data( DB_PATH)
+    return render_template('myaaa.html', login_info=login_info)
+
+@browser_bp.route('/myfinance')
+def myfinance():
+    return render_template('myfinance.html')
+
+@browser_bp.route("/mytable")
+def mytable():
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
     cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
@@ -16,22 +31,22 @@ def list_tables():
     return render_template("tables.html", tables=tables)
 
 
-def generate_select_query_stock():
+def generate_select_query_account_value():
     return """
-    SELECT
-            finance_invest_stock_hold.id,
-            finance_invest_stock_hold.quantity,
-            finance_invest_stock_hold.current_value,
-            finance_invest_stock_hold.check_date,
-            finance_invest_stock.name_full,
-            finance_invest_stock.type
-        FROM finance_invest_stock_hold
-        JOIN finance_invest_stock ON finance_invest_stock_hold.stock_id = finance_invest_stock.id;
+        SELECT
+            finance_invest_account_value.id,
+            finance_invest_account_value.amount,
+            finance_invest_account_value.check_date,
+            finance_invest_account_value.note,
+            finance_invest_account.name_full,
+            finance_invest_account.company
+        FROM finance_invest_account_value
+        JOIN finance_invest_account ON finance_invest_account_value.account_id = finance_invest_account.id;
     """
 
-def generate_select_query(table_name):
-    if table_name == "finance_income":
-        query = """
+
+def generate_select_query_income():
+    return """
         SELECT
             finance_income.category,
             finance_income.amount,
@@ -41,20 +56,37 @@ def generate_select_query(table_name):
             people_individual.first_name,
             people_individual.last_name
         FROM finance_income
-        JOIN people_individual ON finance_income.by_who = people_individual.id;"""
+        JOIN people_individual ON finance_income.by_who = people_individual.id;
+    """
+
+
+def generate_select_query_stock():
+    return """
+    SELECT
+            finance_invest_stock_hold.id,
+            finance_invest_stock.name_full,
+            finance_invest_stock_hold.quantity,
+            finance_invest_stock_hold.current_value,
+            finance_invest_stock_hold.check_date,
+            finance_invest_stock.type,
+            finance_invest_account.name_full
+        FROM finance_invest_stock_hold
+        JOIN finance_invest_stock ON finance_invest_stock_hold.stock_id = finance_invest_stock.id
+        JOIN finance_invest_account ON finance_invest_stock_hold.account_id = finance_invest_account.id;
+    """
+
+
+
+
+def generate_select_query(table_name):
+    if table_name == "finance_income":
+        query = generate_select_query_income()
     elif table_name == "finance_invest_account_value":
-        query = """
-        SELECT
-            finance_invest_account_value.id,
-            finance_invest_account_value.amount,
-            finance_invest_account_value.check_date,
-            finance_invest_account_value.note,
-            finance_invest_account.name_full,
-            finance_invest_account.company
-        FROM finance_invest_account_value
-        JOIN finance_invest_account ON finance_invest_account_value.account_id = finance_invest_account.id;"""
+        query = generate_select_query_account_value()
     elif table_name == "finance_invest_stock_hold":
         query = generate_select_query_stock()
+    elif table_name == "aaa_login":
+        query = generate_select_query_aaa_login()
     else:
         query = f"SELECT * FROM {table_name}"
 

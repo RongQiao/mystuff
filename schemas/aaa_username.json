@@ -1,0 +1,11 @@
+{
+  "table_name": "aaa_username",
+  "columns": [
+    { "name": "id", "type": "INTEGER", "primary_key": true, "auto_increment": true },
+    { "name": "username_short", "type": "TEXT", "nullable": false },
+    { "name": "username", "type": "TEXT", "nullable": false },
+    { "name": "is_email", "type": "BOOLEAN", "nullable": false, "default": true },
+    { "name": "note", "type": "TEXT", "nullable": true }
+  ]
+}
+ 

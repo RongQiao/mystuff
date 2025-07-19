@@ -18,4 +18,4 @@ config/secrets.json
 
 # Ignore db files
 app.db
-data/sample/
+data/import/
