@@ -2,40 +2,63 @@ from config import db_config
 from flask import Blueprint, render_template, request, redirect, url_for
 import sqlite3
 
-from app.routes.aaa import fetch_login_data, inser_new_login_data, LoginFormData
+from app.routes.aaa import (
+    fetch_login_data,
+    inser_new_login_data,
+    delete_login_data,
+    LoginFormData,
+)
 
 browser_bp = Blueprint("browser", __name__)
 DB_PATH = db_config.DB_PATH
 
 
-@browser_bp.route('/')
+@browser_bp.route("/")
 def index():
-    return render_template('index.html')
+    return render_template("index.html")
 
-@browser_bp.route('/myaaa')
+
+@browser_bp.route("/myaaa")
 def myaaa():
     login_info = fetch_login_data()
-    return render_template('myaaa.html', login_info=login_info)
+    return render_template("myaaa.html", login_info=login_info)
 
-@browser_bp.route('/myaaa_add_login', methods=['POST'])
+
+@browser_bp.route("/myaaa_add_login", methods=["POST"])
 def myaaa_add_login():
     input_data = LoginFormData(
-        name_short = request.form.get('name_short'),
-        website = request.form.get('website'),
-        category = request.form.get('category'),
-        note = request.form.get('note'),
-        username_short = request.form.get('username_short'),
-        cipher_shortname = request.form.get('cipher_shortname'),
-        owner = request.form.get('owner'),
-        has_sub_plan = request.form.get('has_sub_plan'),
-        has_point_plan = request.form.get('has_point_plan')
+        name_short=request.form.get("name_short"),
+        website=request.form.get("website"),
+        category=request.form.get("category"),
+        note=request.form.get("note"),
+        username_short=request.form.get("username_short"),
+        cipher_shortname=request.form.get("cipher_shortname"),
+        owner=request.form.get("owner"),
+        has_sub_plan=request.form.get("has_sub_plan"),
+        has_point_plan=request.form.get("has_point_plan"),
     )
     inser_new_login_data(input_data)
-    return redirect(url_for('browser.myaaa'))
+    return redirect(url_for("browser.myaaa"))
 
-@browser_bp.route('/myfinance')
+
+@browser_bp.route("/myaaa_delete_login", methods=["POST"])
+def myaaa_delete_login():
+    login_id = request.form.get("login_id")
+    if login_id:
+        success = delete_login_data(int(login_id))
+        if success:
+            # You could add a flash message here for success feedback
+            pass
+        else:
+            # You could add a flash message here for error feedback
+            pass
+    return redirect(url_for("browser.myaaa"))
+
+
+@browser_bp.route("/myfinance")
 def myfinance():
-    return render_template('myfinance.html')
+    return render_template("myfinance.html")
+
 
 @browser_bp.route("/mytable")
 def mytable():
@@ -92,8 +115,6 @@ def generate_select_query_stock():
     """
 
 
-
-
 def generate_select_query(table_name):
     if table_name == "finance_income":
         query = generate_select_query_income()
@@ -105,7 +126,6 @@ def generate_select_query(table_name):
         query = f"SELECT * FROM {table_name}"
 
     return query
-
 
 
 @browser_bp.route("/table/<table_name>")

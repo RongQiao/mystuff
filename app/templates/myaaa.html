@@ -17,6 +17,7 @@
         <th>username_short</th>
         <th>cipher_shortname</th>
         <th>owner</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -50,6 +51,14 @@
         <td>{{ login.username_short }}</td>
         <td>{{ login.cipher_shortname }}</td>
         <td>{{ login.owner }}</td>
+        <td>
+          <form method="POST" action="{{ url_for('browser.myaaa_delete_login') }}" style="display: inline;">
+            <input type="hidden" name="login_id" value="{{ login.id }}">
+            <button type="submit" class="delete-btn" onclick="return confirm('Are you sure you want to delete this login record?')">
+              Delete
+            </button>
+          </form>
+        </td>
       </tr>
       {% endfor %}
     </tbody>
