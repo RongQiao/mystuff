@@ -1,9 +1,12 @@
+import sqlite3
+from pathlib import Path
+
 from app.models.dba.schema_loader import load_schema, insert_data_from_json
 from config import db_config
-from pathlib import Path
-import sqlite3
+
 
 def init_db():
+    """Initialize the database directory and SQLite file."""
     if not db_config.DB_DIR.exists():
         db_config.DB_DIR.mkdir(parents=True)
         print(f"Created database directory: {db_config.DB_DIR}")
@@ -18,6 +21,7 @@ def init_db():
 
 
 def drop_all_tables(db_path):
+    """Drop all existing tables from the database."""
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
@@ -37,17 +41,20 @@ def drop_all_tables(db_path):
 
 
 def dba(run_schema: bool = True, run_data: str = "sample"):
+    """Main database administration function for schema creation and data import."""
     if run_data not in str(db_config.DATA_FILE_PATH):
         db_config.DATA_FILE_PATH = db_config.DB_DIR / run_data
 
     if run_schema:
-        # make sure db is initialzed
+        # make sure db is initialized
         init_db()
         # drop all tables if there are old data -- for development phase
         drop_all_tables(db_config.DB_PATH)
         # create tables
         path = Path(db_config.SCHEMA_PATH)
         schema_files = list(path.glob('*.json'))
+        # adjust order of schema files
+
         for schema in schema_files:
             load_schema(schema, db_config.DB_PATH)
 

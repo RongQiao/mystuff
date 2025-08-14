@@ -11,7 +11,7 @@
     { "name": "register_date", "type": "DATE", "nullable": true },
     { "name": "tier", "type": "INTEGER", "nullable": true },
     { "name": "note", "type": "TEXT", "nullable": true },
-    { "name": "has_sub_plan", "type": "BOOLEAN", "nullable": false, "default": true },
-    { "name": "has_point_plan", "type": "BOOLEAN", "nullable": false, "default": false }
+    { "name": "has_sub_plan", "type": "INTEGER", "nullable": false, "default": 1 },
+    { "name": "has_point_plan", "type": "INTEGER", "nullable": false, "default": 0 }
   ]
 }
